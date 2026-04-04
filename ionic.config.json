@@ -1,0 +1,7 @@
+{
+  "name": "VitaMindApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
