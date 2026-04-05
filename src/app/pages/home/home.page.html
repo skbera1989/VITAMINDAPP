@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <app-common-header></app-common-header>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+
+    <!-- Greeting -->
+    <h2>Good Morning, User 👋</h2>
+    <p>Your health snapshot today</p>
+    <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
+
+    <!-- Health Score -->
+    <ion-card *ngIf="aiSummary">
+      <ion-card-header>
+        <ion-card-title>Health Score</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        
+        <h1>{{healthScore}} / 100</h1>
+        <ion-progress-bar [value]="healthScore / 100" color="success"></ion-progress-bar>
+        <p>Based on your latest vitals</p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Vitals Grid -->
+    <ion-grid *ngIf="aiSummary">
+      <ion-row>
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-content>
+              ❤️ <h3>{{ vitals.heartRate ? vitals.heartRate + ' bpm' : 'No data' }}</h3>
+              <p>Heart Rate</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-content>
+              🩸 <h3>{{(vitals.systolic && vitals.diastolic) ? vitals.systolic + ' / ' + vitals.diastolic : 'No data'}}
+              </h3>
+              <p>Blood Pressure</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-content>
+              🌡 <h3>{{ vitals.temperature ? vitals.temperature + ' °F' : 'No data' }}</h3>
+              <p>Temperature</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-content>
+              🫁 <h3>{{ vitals.oxygen ? vitals.oxygen + '%' : 'No data' }}</h3>
+              <p>Oxygen</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Vitals Not Added Yet -->
+    <ion-card color="light" *ngIf="!aiSummary">
+      <ion-card-header>
+        <ion-card-title>Vitals</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          You have not saved your Vitals yet for Today. Get personalized health insights based on your vitals.
+        </p>
+
+        <ion-button expand="block" color="primary" (click)="goToVitals()">
+          Add Vitals
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
