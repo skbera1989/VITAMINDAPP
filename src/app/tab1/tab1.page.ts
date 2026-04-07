@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonGrid, IonCol, IonRow, IonSpinner, IonProgressBar } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { documentOutline, warningOutline, bulbOutline } from 'ionicons/icons';
-import { CommonHeaderComponent } from 'src/app/components/common-header/common-header.component';
 import { HttpService } from 'src/app/services/http-service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
-  standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, CommonHeaderComponent]
+  selector: 'app-tab1',
+  templateUrl: 'tab1.page.html',
+  styleUrls: ['tab1.page.scss'],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, IonicModule, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonGrid, IonCol, IonRow, IonSpinner, IonProgressBar],
 })
-export class HomePage implements OnInit {
+export class Tab1Page {
   healthScore = 0;
   vitalsAdded = false;
   aiSummary = "";
@@ -45,7 +44,7 @@ export class HomePage implements OnInit {
 
     this.httpService.initiateJWT().then(() => {
       
-    }).catch(err => {
+    }).catch((err: any) => {
       console.log('Error initiating JWT:', err);
     });
   }

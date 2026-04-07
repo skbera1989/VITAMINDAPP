@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { documentOutline, warningOutline, bulbOutline, analyticsOutline } from 'ionicons/icons';
-import { CommonHeaderComponent } from 'src/app/components/common-header/common-header.component';
 import { HttpService } from 'src/app/services/http-service';
 
 @Component({
-  selector: 'app-insights',
-  templateUrl: './insights.page.html',
-  styleUrls: ['./insights.page.scss'],
-  standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, CommonHeaderComponent]
+  selector: 'app-tab3',
+  templateUrl: 'tab3.page.html',
+  styleUrls: ['tab3.page.scss'],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, IonicModule, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, IonicModule, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent],
 })
-export class InsightsPage implements OnInit {
+export class Tab3Page {
   aiSummary = "";
   healthData: any = {};
   userInput = '';

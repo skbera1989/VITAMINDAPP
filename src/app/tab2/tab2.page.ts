@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonLabel, IonItem, IonItemDivider, IonIcon, IonDatetime, IonSpinner } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { ToastController, IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
@@ -13,17 +13,15 @@ import {
   waterOutline,
   calendarOutline
 } from 'ionicons/icons';
-import { CommonHeaderComponent } from 'src/app/components/common-header/common-header.component';
-import { HttpService } from '../../services/http-service';
+import { HttpService } from '../services/http-service';
 
 @Component({
-  selector: 'app-vitals',
-  templateUrl: './vitals.page.html',
-  styleUrls: ['./vitals.page.scss'],
-  standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, CommonHeaderComponent]
+  selector: 'app-tab2',
+  templateUrl: 'tab2.page.html',
+  styleUrls: ['tab2.page.scss'],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, IonicModule, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, IonicModule, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonLabel, IonItem, IonItemDivider, IonIcon, IonDatetime, IonSpinner ]
 })
-export class VitalsPage {
+export class Tab2Page {
   loading = false;
   vitals = {
     heartRate: null,
@@ -114,4 +112,5 @@ export class VitalsPage {
       this.loading = false;
     });
   }
+
 }
