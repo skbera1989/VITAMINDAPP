@@ -76,7 +76,7 @@
   
     <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
     <!-- Save Button -->
-    <ion-button expand="block" size="large" color="success" (click)="saveVitals()">
+    <ion-button expand="block" size="large" color="success" (click)="saveVitals()" [disabled]="loading || !vitals.heartRate || !vitals.systolic || !vitals.diastolic">
       Save Vitals
     </ion-button>
   

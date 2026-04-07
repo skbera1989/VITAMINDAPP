@@ -10,3 +10,7 @@
   ion-item {
     margin-bottom: 8px;
   }
+
+  ion-toast {
+    z-index: 99999 !important;
+  }
