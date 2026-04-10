@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: VITAMINDAPP
+    env: static
+    buildCommand: ionic build
+    staticPublishPath: www
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
