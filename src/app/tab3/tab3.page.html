@@ -13,91 +13,68 @@
     </ion-toolbar>
   </ion-header>
 
-    <!-- AI Insight -->
-    <ion-card color="light">
-      <ion-card-header>
-        <ion-icon name="analytics-outline"></ion-icon>
-        <ion-card-title>Personalized Health Insights</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div *ngIf="!aiSummary">
-          <p>
-            Get personalized health insights based on your vitals.
-          </p>
-          <ion-button expand="block" color="primary" (click)="goToVitals()">
-            Add Vitals
-          </ion-button>
-        </div>
-        <div *ngIf="aiSummary">
-          <p>
-            Based on your latest vitals, here are some insights:
-          </p>
-          <!-- Summary -->
-      <div class="section">
-        <ion-icon name="document-text-outline"></ion-icon>
-        <h2>Summary</h2>
-        <p>{{ healthData.summary }}</p>
-      </div>
-  
-      <!-- Concerns -->
-      <div class="section">
-        <ion-icon name="warning-outline" color="danger"></ion-icon>
-        <h2>Concerns</h2>
-        <p>{{ healthData.concerns }}</p>
-      </div>
-  
-      <!-- Advice -->
-      <div class="section">
-        <ion-icon name="bulb-outline" color="success"></ion-icon>
-        <h2>Advice</h2>
-        <ul>
-          <li *ngFor="let tip of healthData.advice">
-            {{ tip }}
-          </li>
-        </ul>
-      </div>
-        </div>
-        
-        
-        <!-- <ion-button expand="block" color="primary" (click)="goToInsights()">
-          Ask AI
-        </ion-button> -->
-      </ion-card-content>
-    </ion-card>
-  
-  <div class="ion-padding">
-    <!-- Chat Section -->
-    <h3>Ask AI</h3>
-  
-    <ion-list>
-      <ion-item *ngFor="let msg of messages" lines="none">
-        <div [class.user]="msg.role === 'user'" [class.bot]="msg.role === 'bot'">
-          {{ msg.text }}
-        </div>
-      </ion-item>
-    </ion-list>
-  
-    <!-- Loader -->
-    <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
-  
-  </div>
-  
-  <!-- Chat Input -->
-  <div>
-    <!-- <ion-toolbar> -->
-  
-      <ion-item>
-        <ion-textarea
-          placeholder="Ask about your health..."
-          [(ngModel)]="userInput"
-          auto-grow="true">
-        </ion-textarea>
-  
-        <ion-button slot="end" (click)="sendMessage()" disabled="true">
-          Send
+  <!-- AI Insight -->
+  <ion-card color="light">
+    <ion-card-header>
+      <ion-icon name="analytics-outline"></ion-icon>
+      <ion-card-title>Personalized Health Insights</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div *ngIf="!healthData">
+        <p>
+          Get personalized health insights based on your symptoms.
+        </p>
+        <ion-button expand="block" color="primary" (click)="goToHome()">
+          Add Symptoms
         </ion-button>
-      </ion-item>
-  
-    <!-- </ion-toolbar> -->
-     </div>
+      </div>
+      <div *ngIf="healthData">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Health Score</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <h1>{{ healthData.healthscore }} / 100</h1>
+            <ion-progress-bar [value]="healthData.healthscore / 100" color="success"></ion-progress-bar>
+            <p>Based on your inputs provided.</p>
+          </ion-card-content>
+        </ion-card>
+        <p>
+          Based on your latest symptoms, here are some insights:
+        </p>
+
+        <!-- Summary -->
+        <div class="section">
+          <ion-icon name="checkmark-circle" [ngClass]="healthData.risk_level + '-risk'"></ion-icon>
+          <h2>Risk Level</h2>
+          <p>{{ healthData.risk_level }}</p>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <h2>Summary</h2>
+          <p>{{ healthData.summary }}</p>
+        </div>
+
+        <!-- Concerns -->
+        <div class="section">
+          <ion-icon name="warning-outline" color="danger"></ion-icon>
+          <h2>Concerns</h2>
+          <p>{{ healthData.concerns }}</p>
+        </div>
+
+        <!-- Advice -->
+        <div class="section">
+          <ion-icon name="bulb-outline" color="success"></ion-icon>
+          <h2>Advice</h2>
+          <ul>
+            <li *ngFor="let tip of healthData.advice">
+              {{ tip }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

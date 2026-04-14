@@ -15,3 +15,71 @@ h1 {
   p {
     color: #666;
   }
+
+
+
+
+
+
+
+  .form-container {
+    padding: 20px;
+    display: flex;
+    background: #f5f7fb;
+    flex-direction: column;
+    gap: 14px;
+    .other-person-section{
+      gap: 14px;
+    }
+  }
+  
+  .form-item {
+    --background: #ffffff;
+    --border-radius: 12px;
+    --padding-start: 12px;
+    --inner-padding-end: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  
+  .error-text {
+    font-size: 12px;
+    margin-left: 6px;
+  }
+  
+  .submit-btn {
+    margin-top: 20px;
+    --border-radius: 12px;
+    font-weight: 600;
+  }
+  
+  /* Header */
+  .header-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .header-icon ion-icon {
+    font-size: 60px;
+    color: white;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    padding: 16px;
+    border-radius: 50%;
+  }
+  
+  .header-icon h2 {
+    margin-top: 10px;
+  }
+
+  .radio-item {
+    --background: #ffffff;
+    margin-top: 6px;
+    border-radius: 10px;
+    padding-left: 10px;
+  }
+  
+  .radio-item ion-radio {
+    margin-right: 10px;
+  }
+  

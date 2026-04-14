@@ -1,84 +1,73 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Vitals
+      Follow Up Questions
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Vitals</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div >
-
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Enter Your Vitals</ion-card-title>
-      </ion-card-header>
-  
-      <ion-card-content>
-  
-        <!-- ❤️ Heart Rate -->
-        <ion-item lines="full">
-          <ion-icon name="pulse-outline" slot="start" color="danger"></ion-icon>
-          <ion-label position="stacked">
-            Heart Rate (bpm) <span class="required">*</span>
-          </ion-label>
-          <ion-input type="number" [(ngModel)]="vitals.heartRate"></ion-input>
-        </ion-item>
-  
-        <!-- 🩺 Blood Pressure -->
-        <ion-item-divider>
-          <ion-label>Blood Pressure</ion-label>
-        </ion-item-divider>
-  
-        <ion-item>
-          <ion-label position="stacked">
-            Systolic (mmHg) <span class="required">*</span>
-          </ion-label>
-          <ion-input type="number" [(ngModel)]="vitals.systolic"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="stacked">
-            Diastolic (mmHg) <span class="required">*</span>
-          </ion-label>
-          <ion-input type="number" [(ngModel)]="vitals.diastolic"></ion-input>
-        </ion-item>
-  
-        <!-- 🌡 Temperature -->
-        <ion-item>
-          <ion-icon name="thermometer-outline" slot="start" color="warning"></ion-icon>
-          <ion-label position="stacked">Body Temperature (°F)</ion-label>
-          <ion-input type="number" [(ngModel)]="vitals.temperature"></ion-input>
-        </ion-item>
-  
-        <!-- 🫁 Oxygen -->
-        <ion-item>
-          <ion-icon name="water-outline" slot="start" color="primary"></ion-icon>
-          <ion-label position="stacked">Oxygen Level (%)</ion-label>
-          <ion-input type="number" [(ngModel)]="vitals.oxygen"></ion-input>
-        </ion-item>
-  
-        <!-- 📅 Date -->
-        <ion-item>
-          <ion-icon name="calendar-outline" slot="start"></ion-icon>
-          <ion-label position="stacked">Date & Time</ion-label>
-          <ion-datetime presentation="date-time" [(ngModel)]="vitals.date"></ion-datetime>
-        </ion-item>
-  
-      </ion-card-content>
-    </ion-card>
-  
-    <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
-    <!-- Save Button -->
-    <ion-button expand="block" size="large" color="success" (click)="saveVitals()" [disabled]="loading || !vitals.heartRate || !vitals.systolic || !vitals.diastolic">
-      Save Vitals
+  <div *ngIf="questions.length === 0" class="welcome-container">
+    <p>
+      Nothing to follow up.
+    </p>
+    <ion-button expand="block" color="primary" (click)="goToHome()">
+      Add Symptoms
     </ion-button>
-  
   </div>
+  <form [formGroup]="followUpForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-container">
+
+      <div class="form-card" *ngFor="let q of questions">
+    
+        <label class="form-label">{{ q.question }}</label>
+    
+        <input 
+          *ngIf="q.type === 'text'" 
+          class="form-input"
+          [formControlName]="q.field_key" 
+          placeholder="Enter your answer" 
+        />
+    
+        <input 
+          *ngIf="q.type === 'number'" 
+          type="number" 
+          class="form-input"
+          [formControlName]="q.field_key" 
+          placeholder="Enter value"
+        />
+    
+        <ion-toggle 
+          *ngIf="q.type === 'boolean'" 
+          class="form-toggle"
+          [formControlName]="q.field_key">
+        </ion-toggle>
+    
+        <ion-select 
+          *ngIf="q.type === 'select'" 
+          class="form-select"
+          interface="popover"
+          placeholder="Select option"
+          [formControlName]="q.field_key">
+    
+          <ion-select-option 
+            *ngFor="let opt of q.options" 
+            [value]="opt">
+            {{ opt }}
+          </ion-select-option>
+    
+        </ion-select>
+    
+      </div>
+      <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
+      <ion-button 
+        *ngIf="questions.length > 0"
+        expand="block" 
+        type="submit"
+        [disabled]="followUpForm.invalid || loading">
+        Submit Answers
+        </ion-button>
+    </div>
+  </form>
+  
 </ion-content>

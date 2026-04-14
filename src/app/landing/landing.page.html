@@ -1,0 +1,53 @@
+<div style="background: #f5f7fb; height: 100%;">
+
+
+<div class="header-icon">
+  <ion-icon name="fitness-outline"></ion-icon>
+  <h2>Healthify</h2>
+</div>
+<form [formGroup]="landingForm" (ngSubmit)="onSubmit()" class="form-container">
+
+  <!-- Name -->
+  <ion-item class="form-item" lines="none">
+    <ion-label position="floating">Name</ion-label>
+    <ion-input formControlName="name"></ion-input>
+  </ion-item>
+  <ion-text color="danger" class="error-text"
+    *ngIf="landingForm.get('name')?.invalid && (landingForm.get('name')?.dirty || landingForm.get('name')?.touched)">
+    Name is required.
+  </ion-text>
+
+  <!-- Age -->
+  <ion-item class="form-item" lines="none">
+    <ion-label position="floating">Age</ion-label>
+    <ion-input type="number" formControlName="age"></ion-input>
+  </ion-item>
+
+  <ion-text color="danger" class="error-text"
+    *ngIf="landingForm.get('age')?.invalid && landingForm.get('age')?.touched">
+    Valid age required
+  </ion-text>
+
+  <!-- Gender -->
+  <ion-item class="form-item" lines="none">
+    <ion-label>Gender</ion-label>
+    <ion-select formControlName="gender" interface="popover">
+      <ion-select-option value="male">Male</ion-select-option>
+      <ion-select-option value="female">Female</ion-select-option>
+      <ion-select-option value="other">Other</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-text color="danger" class="error-text"
+    *ngIf="landingForm.get('gender')?.invalid && (landingForm.get('gender')?.dirty || landingForm.get('gender')?.touched)">
+    Gender is required.
+  </ion-text>
+
+  <!-- Submit -->
+  <ion-button expand="block" type="submit" [disabled]="landingForm.invalid" class="submit-btn">
+    Start Health Check
+  </ion-button>
+
+</form>
+
+</div>

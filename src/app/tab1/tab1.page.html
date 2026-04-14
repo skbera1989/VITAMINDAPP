@@ -13,85 +13,88 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
-  <div class="ion-padding">
-
-    <!-- Greeting -->
-    <h2>Good Morning, User 👋</h2>
-    <p>Your health snapshot today</p>
-    <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
-
-    <!-- Health Score -->
-    <ion-card *ngIf="aiSummary">
-      <ion-card-header>
-        <ion-card-title>Health Score</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        
-        <h1>{{healthScore}} / 100</h1>
-        <ion-progress-bar [value]="healthScore / 100" color="success"></ion-progress-bar>
-        <p>Based on your latest vitals</p>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- Vitals Grid -->
-    <ion-grid *ngIf="aiSummary">
-      <ion-row>
-        <ion-col size="6">
-          <ion-card>
-            <ion-card-content>
-              ❤️ <h3>{{ vitals.heartRate ? vitals.heartRate + ' bpm' : 'No data' }}</h3>
-              <p>Heart Rate</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-
-        <ion-col size="6">
-          <ion-card>
-            <ion-card-content>
-              🩸 <h3>{{(vitals.systolic && vitals.diastolic) ? vitals.systolic + ' / ' + vitals.diastolic : 'No data'}}
-              </h3>
-              <p>Blood Pressure</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col size="6">
-          <ion-card>
-            <ion-card-content>
-              🌡 <h3>{{ vitals.temperature ? vitals.temperature + ' °F' : 'No data' }}</h3>
-              <p>Temperature</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-
-        <ion-col size="6">
-          <ion-card>
-            <ion-card-content>
-              🫁 <h3>{{ vitals.oxygen ? vitals.oxygen + '%' : 'No data' }}</h3>
-              <p>Oxygen</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- Vitals Not Added Yet -->
-    <ion-card color="light" *ngIf="!aiSummary">
-      <ion-card-header>
-        <ion-card-title>Vitals</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>
-          You have not saved your Vitals yet for Today. Get personalized health insights based on your vitals.
-        </p>
-
-        <ion-button expand="block" color="primary" (click)="goToVitals()">
-          Add Vitals
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
+  <div class="header-icon" style="background: #f5f7fb;">
+    <h2>Good Morning, {{userName}} 👋</h2>
+    <span>(Please fill up the below form to analyze health.)</span>
   </div>
+
+  <form [formGroup]="healthForm" (ngSubmit)="onSubmit()" class="form-container">
+    <ion-item class="form-item" lines="none">
+      <ion-label>Who is this for?</ion-label>
+    </ion-item>
+
+    <ion-radio-group formControlName="forWhom">
+
+      <ion-item lines="none" class="radio-item">
+        <ion-label>For Me</ion-label>
+        <ion-radio slot="end" value="me"></ion-radio>
+      </ion-item>
+
+      <ion-item lines="none" class="radio-item">
+        <ion-label>For Others</ion-label>
+        <ion-radio slot="end" value="others"></ion-radio>
+      </ion-item>
+
+    </ion-radio-group>
+
+    <!-- Validation -->
+    <ion-text color="danger" class="error-text"
+      *ngIf="healthForm.get('forWhom')?.invalid && healthForm.get('forWhom')?.touched">
+      Please select an option
+    </ion-text>
+
+    <!-- Show only if "For Others" is selected -->
+    <!-- Name -->
+    <ion-item class="form-item" lines="none">
+      <ion-label position="floating">Person Name</ion-label>
+      <ion-input formControlName="name" [readonly]="healthForm.get('forWhom')?.value === 'me'"></ion-input>
+    </ion-item>
+
+    <ion-text color="danger" class="error-text"
+      *ngIf="healthForm.get('name')?.invalid && healthForm.get('name')?.touched">
+      Name is required
+    </ion-text>
+
+    <!-- Age -->
+    <ion-item class="form-item" lines="none">
+      <ion-label position="floating">Person Age</ion-label>
+      <ion-input type="number" formControlName="age" [readonly]="healthForm.get('forWhom')?.value === 'me'"></ion-input>
+    </ion-item>
+
+    <ion-text color="danger" class="error-text"
+      *ngIf="healthForm.get('age')?.invalid && healthForm.get('age')?.touched">
+      Valid age required
+    </ion-text>
+
+    <!-- Symptoms -->
+    <ion-item class="form-item" lines="none">
+      <ion-label position="floating">Symptoms</ion-label>
+      <ion-textarea rows="3" formControlName="symptoms"></ion-textarea>
+    </ion-item>
+    <ion-text color="danger" class="error-text"
+      *ngIf="healthForm.get('symptoms')?.invalid && healthForm.get('symptoms')?.touched">
+      Symptoms required
+    </ion-text>
+
+    <!-- Duration -->
+    <ion-item class="form-item" lines="none">
+      <ion-label position="floating">Duration (days)</ion-label>
+      <ion-input type="number" formControlName="duration"></ion-input>
+    </ion-item>
+    <ion-text color="danger" class="error-text"
+      *ngIf="healthForm.get('duration')?.invalid && healthForm.get('duration')?.touched">
+      Duration required
+    </ion-text>
+
+    <!-- Medical History -->
+    <ion-item class="form-item" lines="none">
+      <ion-label position="floating">Medical History</ion-label>
+      <ion-textarea rows="3" formControlName="history"></ion-textarea>
+    </ion-item>
+    <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
+    <!-- Submit -->
+    <ion-button expand="block" type="submit" [disabled]="healthForm.invalid || loading" class="submit-btn">
+      Analyze
+    </ion-button>
+  </form>
 </ion-content>

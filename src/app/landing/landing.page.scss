@@ -1,0 +1,83 @@
+/* Styles for the landing page */
+
+ion-content {
+  --background: #f9f9f9;
+  padding: 16px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+ion-item {
+  margin-bottom: 16px;
+}
+
+ion-label {
+  font-weight: bold;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.form-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-item {
+  --background: #ffffff;
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.error-text {
+  font-size: 12px;
+  margin-left: 6px;
+  margin-top: -8px;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  --border-radius: 12px;
+  font-weight: 600;
+}
+
+ion-item#dob-trigger {
+  cursor: pointer;
+}
+
+ion-text {
+  font-size: 14px;
+  color: #666;
+}
+
+.header-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.header-icon ion-icon {
+  font-size: 60px;
+  color: white;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  padding: 16px;
+  border-radius: 50%;
+}
+
+.header-icon h2 {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #333;
+}

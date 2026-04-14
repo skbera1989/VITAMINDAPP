@@ -14,3 +14,66 @@
   ion-toast {
     z-index: 99999 !important;
   }
+
+
+
+  .form-container {
+    padding: 16px;
+    background: #f5f7fb;
+    min-height: 100vh;
+  }
+  
+  .form-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  /* Inputs */
+  .form-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    transition: 0.2s ease;
+  }
+  
+  .form-input:focus {
+    border-color: #4f8cff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.1);
+  }
+  
+  /* Select */
+  .form-select {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    padding: 6px;
+  }
+  
+  /* Toggle */
+  .form-toggle {
+    margin-top: 8px;
+  }
+  
+  /* Optional: spacing for better UX */
+  .form-card:hover {
+    transform: translateY(-2px);
+    transition: 0.2s ease;
+  }
+
+  .welcome-container{
+    padding: 20px;
+  }
